@@ -45,16 +45,51 @@ o	Field 2 → EV Status
 
 
 ## MATLAB Code (Without MQTT Client Toolbox) 
-
-
-
+clear; clc;
+ 
+% Define ThingSpeak API Details
+writeAPIKey = 'YOUR_WRITE_API_KEY';  % Replace with your ThingSpeak Write API Key
+readAPIKey = 'YOUR_READ_API_KEY';    % Replace with your ThingSpeak Read API Key
+channelID = 'YOUR_CHANNEL_ID';       % Replace with your ThingSpeak Channel ID
+ 
+% Remote Control Menu
+disp('Choose a remote function:');
+disp('1 - Lock Doors');
+disp('2 - Unlock Doors');
+disp('3 - Start Engine');
+disp('4 - Stop Engine');
+disp('5 - Turn On Lights');
+disp('6 - Turn Off Lights');
+ 
+choice = input('Enter your choice (1-6): ');
+ 
+% Define EV control commands
+commands = ["LOCK", "UNLOCK", "START", "STOP", "LIGHT_ON", "LIGHT_OFF"];
+ 
+% Validate choice and send command
+if choice >= 1 && choice <= 6
+    commandSent = commands(choice);
+    url = ['https://api.thingspeak.com/update?api_key=', writeAPIKey, '&field1=', commandSent];
+    
+    % Send HTTP request to update ThingSpeak
+    response = webwrite(url, []);
+    disp(['Command Sent: ', commandSent]);
+    
+    % Wait for ESP32 to update status
+    pause(3);
+    
+    % Read EV Status from ThingSpeak
+    statusURL = ['https://api.thingspeak.com/channels/', channelID, '/fields/2/last.txt?api_key=', readAPIKey];
+    evStatus = webread(statusURL);
+    
+    % Display received status
+    disp(['EV Status: ', evStatus]);
+else
+    disp('Invalid choice. Please enter a number between 1 and 6.');
+end
 ## Output:
-
-
-
-
+<img width="1288" height="703" alt="image" src="https://github.com/user-attachments/assets/e7097dba-2a43-4e3f-b7a2-25f66b2bf9e6" />
 ## Result:
-
-This experiment demonstrated how MATLAB can be used to remotely control an EV using ThingSpeak API. The system provides a secure, cloud-based approach to IoT-enabled vehicle automation.
+ This experiment demonstrated how MATLAB can be used to remotely control an EV using ThingSpeak API. The system provides a secure, cloud-based approach to IoT-enabled vehicle automation.
 
 
