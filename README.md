@@ -88,13 +88,10 @@ else
     disp('Invalid choice. Please enter a number between 1 and 6.');
 end```
 
-
-
-
 ## Output:
 <img width="1288" height="703" alt="image" src="https://github.com/user-attachments/assets/e7097dba-2a43-4e3f-b7a2-25f66b2bf9e6" />
-## Result:
 
+## Result:
 This experiment demonstrated how MATLAB can be used to remotely control an EV using ThingSpeak API. The system provides a secure, cloud-based approach to IoT-enabled vehicle automation.
 
 
