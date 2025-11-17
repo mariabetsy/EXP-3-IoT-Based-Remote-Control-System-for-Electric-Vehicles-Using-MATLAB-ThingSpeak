@@ -45,7 +45,7 @@ o	Field 2 → EV Status
 
 
 ## MATLAB Code (Without MQTT Client Toolbox)
-``clear; clc;
+```clear; clc;
  
 % Define ThingSpeak API Details
 writeAPIKey = 'YOUR_WRITE_API_KEY';  % Replace with your ThingSpeak Write API Key
@@ -86,7 +86,7 @@ if choice >= 1 && choice <= 6
     disp(['EV Status: ', evStatus]);
 else
     disp('Invalid choice. Please enter a number between 1 and 6.');
-end``
+end```
 
 
 
